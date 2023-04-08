@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-
 /**
  *
  * @author PICHAU
@@ -145,52 +144,65 @@ public class main_frame extends javax.swing.JFrame {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-               int j = 0;
-               while (j<=100){
-                   jpbCalc.setValue(j);
-                   j=j+20;
-                   try {
-                       Thread.sleep(25);
-                   } catch (InterruptedException ex) {
-                       Logger.getLogger(main_frame.class.getName()).log(Level.SEVERE, null, ex);
-                   }
-               }
+                int j = 0;
+                while (j <= 100) {
+                    jpbCalc.setValue(j);
+                    j = j + 20;
+                    try {
+                        Thread.sleep(25);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(main_frame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
         });
         jpbCalc.setValue(0);
         txtRomano.setText(txtRomano.getText().toLowerCase());
         int valor = 0;
-        int progresso =0;
+        int progresso = 0;
+        String teste = new String();
         String texto = new String();
         System.out.println(texto);
         for (int i = 0; i < txtRomano.getText().length(); i++) {
-            progresso = progresso+20;
+            progresso = progresso + 20;
             jpbCalc.setValue(progresso);
-            if ("m".equals(txtRomano.getText().substring(i,i+1))) {
+            if ("m".equals(txtRomano.getText().substring(i, i + 1))) {
                 valor = valor + 1000;
             }
-            if ("d".equals(txtRomano.getText().substring(i,i+1))) {
+            if ("d".equals(txtRomano.getText().substring(i, i + 1))) {
                 valor = valor + 500;
             }
-            if ("c".equals(txtRomano.getText().substring(i,i+1))) {
+            if ("c".equals(txtRomano.getText().substring(i, i + 1))) {
                 valor = valor + 100;
             }
-            if ("l".equals(txtRomano.getText().substring(i,i+1))) {
+            if ("l".equals(txtRomano.getText().substring(i, i + 1))) {
                 valor = valor + 50;
             }
-            if ("x".equals(txtRomano.getText().substring(i,i+1))) {
-                valor = valor + 10;
+            if ("x".equals(txtRomano.getText().substring(i, i + 1))) {
+                if (i > 0 && "ix".equals(txtRomano.getText().substring(i - 1, 1))) {
+                    teste = txtRomano.getText().substring(i - 1, 1);
+                    teste = "";
+                    valor = valor + 9;
+                } else {
+                    valor = valor + 10;
+                }
             }
-            if ("v".equals(txtRomano.getText().substring(i,i+1))) {
-                valor = valor + 5;
-            }
-            if ("i".equals(txtRomano.getText().substring(i,i+1))) {
-                valor = valor + 1;
+            if ("v".equals(txtRomano.getText().substring(i, i + 1))) {
+                if (i > 0 && "iv".equals(txtRomano.getText().substring(i - 1, 1))) {
+                    teste = txtRomano.getText().substring(i - 1, 1);
+                    valor = valor + 4;
+                } else {
+                    valor = valor + 5;
+                }
+                if ("i".equals(txtRomano.getText().substring(i, i + 1))) {
+                    valor = valor + 1;
+                }
             }
         }
-        t.start();
-        txtResultado.setText(String.valueOf(valor)); 
-        
+            t.start();
+
+            txtResultado.setText(String.valueOf(valor));
+
     }//GEN-LAST:event_btn_calcMouseClicked
 
     private void bt_LimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_LimparMouseClicked
@@ -203,12 +215,12 @@ public class main_frame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         try {
             UIManager.setLookAndFeel(new FlatMacDarkLaf());
         } catch (Exception e) {
         }
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new main_frame().setVisible(true);
@@ -230,5 +242,5 @@ public class main_frame extends javax.swing.JFrame {
     private void setIconImage() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icon.png")));
     }
-        
+
 }
