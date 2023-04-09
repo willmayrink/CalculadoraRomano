@@ -160,10 +160,13 @@ public class main_frame extends javax.swing.JFrame {
         txtRomano.setText(txtRomano.getText().toLowerCase());
         int valor = 0;
         int progresso = 0;
-        String teste = new String();
+        String letraAtual = new String();
         String texto = new String();
         System.out.println(texto);
+        String proximaLetra = new String();
         for (int i = 0; i < txtRomano.getText().length(); i++) {
+            letraAtual = txtRomano.getText().substring(i, i + 1);
+            proximaLetra = txtRomano.getText().substring(i + 1, i + 2);
             progresso = progresso + 20;
             jpbCalc.setValue(progresso);
             if ("m".equals(txtRomano.getText().substring(i, i + 1))) {
@@ -179,29 +182,21 @@ public class main_frame extends javax.swing.JFrame {
                 valor = valor + 50;
             }
             if ("x".equals(txtRomano.getText().substring(i, i + 1))) {
-                if (i > 0 && "ix".equals(txtRomano.getText().substring(i - 1, 1))) {
-                    teste = txtRomano.getText().substring(i - 1, 1);
-                    teste = "";
-                    valor = valor + 9;
-                } else {
-                    valor = valor + 10;
-                }
+
+                valor = valor + 10;
             }
             if ("v".equals(txtRomano.getText().substring(i, i + 1))) {
-                if (i > 0 && "iv".equals(txtRomano.getText().substring(i - 1, 1))) {
-                    teste = txtRomano.getText().substring(i - 1, 1);
-                    valor = valor + 4;
-                } else {
-                    valor = valor + 5;
-                }
-                if ("i".equals(txtRomano.getText().substring(i, i + 1))) {
-                    valor = valor + 1;
-                }
-            }
-        }
-            t.start();
 
-            txtResultado.setText(String.valueOf(valor));
+                valor = valor + 5;
+            }
+            if ("i".equals(txtRomano.getText().substring(i, i + 1))) {
+                valor = valor + 1;
+            }
+
+        }
+        t.start();
+
+        txtResultado.setText(String.valueOf(valor));
 
     }//GEN-LAST:event_btn_calcMouseClicked
 
