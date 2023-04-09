@@ -160,7 +160,7 @@ public class main_frame extends javax.swing.JFrame {
         txtRomano.setText(txtRomano.getText().toLowerCase());
         int valor = 0;
         int progresso = 0;
-        String teste = "";
+        String teste = new String();
         String texto = new String();
         System.out.println(texto);
         for (int i = 0; i < txtRomano.getText().length(); i++) {
@@ -179,20 +179,29 @@ public class main_frame extends javax.swing.JFrame {
                 valor = valor + 50;
             }
             if ("x".equals(txtRomano.getText().substring(i, i + 1))) {
-                valor = valor + 10;
-
+                if (i > 0 && "ix".equals(txtRomano.getText().substring(i - 1, 1))) {
+                    teste = txtRomano.getText().substring(i - 1, 1);
+                    teste = "";
+                    valor = valor + 9;
+                } else {
+                    valor = valor + 10;
+                }
             }
             if ("v".equals(txtRomano.getText().substring(i, i + 1))) {
-                valor = valor + 5;
-
+                if (i > 0 && "iv".equals(txtRomano.getText().substring(i - 1, 1))) {
+                    teste = txtRomano.getText().substring(i - 1, 1);
+                    valor = valor + 4;
+                } else {
+                    valor = valor + 5;
+                }
                 if ("i".equals(txtRomano.getText().substring(i, i + 1))) {
                     valor = valor + 1;
                 }
             }
         }
-        t.start();
+            t.start();
 
-        txtResultado.setText(String.valueOf(valor));
+            txtResultado.setText(String.valueOf(valor));
 
     }//GEN-LAST:event_btn_calcMouseClicked
 
